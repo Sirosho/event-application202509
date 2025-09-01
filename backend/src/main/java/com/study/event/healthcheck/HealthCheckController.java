@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 // API가 살아있는지 확인하는 경로
-//
 @RestController
 @Slf4j
 public class HealthCheckController {
