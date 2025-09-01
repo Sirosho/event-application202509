@@ -1,32 +1,37 @@
-import {createBrowserRouter} from "react-router-dom";
-import ErrorPage from "../pages/ErrorPage.jsx";
-import HomePage from "../pages/HomePage.jsx";
-import EventPage from "../pages/EventPage.jsx";
-import RootLayout from "../layouts/RootLayout.jsx";
-import EventDetailPage from "../pages/EventDetailPage.jsx";
-
+import {createBrowserRouter} from 'react-router-dom';
+import ErrorPage from '../pages/ErrorPage.jsx';
+import HomePage from '../pages/HomePage.jsx';
+import EventPage from '../pages/EventPage.jsx';
+import RootLayout from '../layouts/RootLayout.jsx';
+import EventDetailPage from '../pages/EventDetailPage.jsx';
+import EventLayout from '../layouts/EventLayout.jsx';
 
 const router = createBrowserRouter([
     {
-        path: "/", // 이 경로와 칠드런의 경로를 조합해서 씀
+        path: '/',
         element: <RootLayout/>,
         errorElement: <ErrorPage/>,
         children: [
             {
-                index: true, // path가 비어있을때 사용
+                index: true,
                 element: <HomePage/>
             },
             {
-                path: "events",
-                element: <EventPage/>
+                path: 'events',
+                element: <EventLayout/>,
+                children: [
+                    {
+                        index: true,
+                        element: <EventPage/>
+                    },
+                    {
+                        path: ':eventId',
+                        element: <EventDetailPage/>
+                    }
+                ]
             },
-            {
-                path: "events/:id",
-                element: <EventDetailPage/>
-            }
         ]
     },
-
 ]);
 
 export default router;
