@@ -5,10 +5,10 @@ import {Outlet} from "react-router-dom";
 const RootLayout = () => {
     return (
         <>
-        <MainNavigation />
-        <main>
-            <Outlet />
-        </main>
+            <MainNavigation/>
+            <main>
+                <Outlet/>
+            </main>
         </>
     );
 };
