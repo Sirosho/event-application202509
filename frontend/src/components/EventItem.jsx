@@ -1,11 +1,12 @@
 import styles from './EventItem.module.scss';
-import {useLoaderData, useNavigate} from "react-router-dom";
+import {Link, useLoaderData, useNavigate} from "react-router-dom";
 
 const EventItem = ({ event }) => {
     const {
         title,
         desc: description,
         'img-url': image,
+
         'start-date': date,
     } = event;
 
@@ -41,7 +42,8 @@ const EventItem = ({ event }) => {
             <time>{date}</time>
             <p>{description}</p>
             <menu className={styles.actions}>
-                <a href='#'>Edit</a>
+                {/* 상대경로로 edit만 적어주면 /edit이 붙음 */}
+                <Link to='edit'>Edit</Link>
                 <button onClick={deleteEvent}>Delete</button>
             </menu>
         </article>
