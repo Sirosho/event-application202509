@@ -1,36 +1,22 @@
 import styles from './EventItem.module.scss';
-import {Link, useLoaderData, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useSubmit} from 'react-router-dom';
 
 const EventItem = ({ event }) => {
     const {
+        id,
         title,
         desc: description,
         'img-url': image,
-
         'start-date': date,
     } = event;
 
-    const detailEvent = useLoaderData();
+    // Form 컴포넌트 없이 action함수를 작동시키는 법
+    const submit = useSubmit();
 
-    // console.log(detailEvent.id);
-    const navigate = useNavigate();
-
-
-    // delete 요청
-     const deleteEvent = async () => {
-         console.log('삭제요청')
-         const response = await fetch(`http://localhost:9000/api/events/${detailEvent.id}`, {
-             method: 'DELETE'
-         })
-         if(response.ok) {
-             alert('삭제되었습니다.');
-             console.log(response.json())
-             // 이벤트 페이지로 돌아가기
-             navigate('/events');
-         }
-     }
-
-
+    const handleRemove = e => {
+        // Form없이 action함수 트리거 - 낙관적 업데이트
+        submit(null, {method:'DELETE'});
+    };
 
     return (
         <article className={styles.event}>
@@ -42,9 +28,8 @@ const EventItem = ({ event }) => {
             <time>{date}</time>
             <p>{description}</p>
             <menu className={styles.actions}>
-                {/* 상대경로로 edit만 적어주면 /edit이 붙음 */}
                 <Link to='edit'>Edit</Link>
-                <button onClick={deleteEvent}>Delete</button>
+                <button onClick={handleRemove}>Delete</button>
             </menu>
         </article>
     );

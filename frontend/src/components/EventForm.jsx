@@ -1,6 +1,6 @@
 import styles from './EventForm.module.scss';
 import {useNavigate, Form} from 'react-router-dom';
-
+//                             기본으로 빈객체를 넣어줌
 const EventForm = ({method, event = {}}) => {
 
     // 새로고침 없이 페이지 이동

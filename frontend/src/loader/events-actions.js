@@ -2,11 +2,11 @@
 
 import {redirect} from 'react-router-dom';
 
-export const saveAction = async ({ request }) => {
-    console.log('save action!!');
+export const saveAction = async ({ request, params }) => {
+    // console.log('save action!!');
 
     // form에 입력한 값 가져오기
-    const formData = request.formData();
+    const formData = await request.formData();
 
     // 서버로 보낼 payload
     const payload = {
@@ -16,7 +16,12 @@ export const saveAction = async ({ request }) => {
         imageUrl: formData.get('image')
     };
 
-    const response = await fetch('http://localhost:9000/api/events', {
+    let requestUrl = 'http://localhost:9000/api/events';
+    if (request.method === 'PUT') {
+        requestUrl += `/${params.eventId}`;
+    }
+
+    const response = await fetch(requestUrl, {
         method: request.method,
         headers: {
             'Content-Type': 'application/json'
@@ -29,5 +34,18 @@ export const saveAction = async ({ request }) => {
     }
 
     // 목록페이지로 리다이렉트
+    return redirect('/events');
+};
+
+// 삭제처리 액션 함수
+export const deleteAction = async ({params}) => {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    console.log('삭제 액션 함수 호출!');
+
+    const res = await fetch(`http://localhost:9000/api/events/${params.eventId}`, {
+        method: 'DELETE'
+    });
+
     return redirect('/events');
 };
