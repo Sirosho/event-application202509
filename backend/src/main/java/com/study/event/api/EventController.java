@@ -21,10 +21,13 @@ public class EventController {
 
     private final EventService eventService;
 
-    // 전체 조회 요청
+    // 전체 요청
     @GetMapping
-    public ResponseEntity<?> getList() {
-        List<EventResponse> events = eventService.getEvents();
+    public ResponseEntity<?> getList(
+            @RequestParam(defaultValue = "1") int page
+    ) {
+        Map<String, Object> events = eventService.getEvents(page);
+
         return ResponseEntity.ok().body(events);
     }
 
