@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import styles from './SignUpForm.module.scss';
 import {AUTH_API_URL} from "../../config/host-config.js";
+import {debounce} from "lodash";
 
 const EmailInput = () => {
 
@@ -24,12 +25,12 @@ const EmailInput = () => {
             setError('이메일이 올바르지 않습니다.');
             return;
         }
-        (async()=>{
+        (async () => {
             const response =
                 await fetch(`${AUTH_API_URL}/check-email?email=${inputValue}`);
-            const {isDuplicate,message}= await response.json();
+            const {isDuplicate, message} = await response.json();
 
-            if(isDuplicate){
+            if (isDuplicate) {
                 setError(message);
             }
 
@@ -46,7 +47,7 @@ const EmailInput = () => {
                 className={error ? styles.invalidInput : ''}
                 type='email'
                 placeholder='Enter your email'
-                onChange={handleEmail}
+                onChange={debounce(handleEmail, 1000)}
             />
             {error && <p className={styles.errorMessage}>{error}</p>}
         </>
