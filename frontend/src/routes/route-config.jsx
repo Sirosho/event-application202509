@@ -1,12 +1,11 @@
 import {createBrowserRouter} from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage.jsx';
-import HomePage from '../pages/HomePage.jsx';
 import EventPage from '../pages/EventPage.jsx';
 import RootLayout from '../layouts/RootLayout.jsx';
 import EventDetailPage from '../pages/EventDetailPage.jsx';
 import EventLayout from '../layouts/EventLayout.jsx';
-import {eventListLoader, eventDetailLoader} from '../loader/events-loader.js';
-import { saveAction as manipulateAction, deleteAction } from '../loader/events-actions.js';
+import {eventDetailLoader} from '../loader/events-loader.js';
+import {deleteAction, saveAction as manipulateAction} from '../loader/events-actions.js';
 import NewEventPage from '../pages/NewEventPage.jsx';
 import EditPage from '../pages/EditPage.jsx';
 import HomeLayout from "../layouts/HomeLayout.jsx";
