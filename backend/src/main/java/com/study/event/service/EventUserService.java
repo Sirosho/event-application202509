@@ -111,6 +111,51 @@ public class EventUserService {
     private String generateCode() {
         return String.valueOf((int) (Math.random() * 9000) + 1000);
     }
+
+    /**
+     * 클라이언트가 전송한 인증코드를 검증하는 처리
+     */
+    public boolean isMatchCode(String email, String code){
+
+        // 이메일을 통해 사용자의 PK를 조회
+        EventUser eventUser = eventUserRepository.findByEmail(email).orElseThrow();
+
+        // 사용자의 인증코드를 FK를 통해 데이터베이스에서 조회
+        EmailVerification verification
+                = emailVerificationRepository.findByEventUser(eventUser).orElseThrow();
+
+        // 코드가 일치하고 만료시간이 지나지 않았는지 체크
+        if(
+                code.equals(verification.getVerificationCode())
+                && verification.getExpiryDate().isAfter(LocalDateTime.now())
+        ){
+            // 이메일 인증 완료처리
+            eventUser.completeVerifying();
+            eventUserRepository.save(eventUser);
+
+            // 인증번호를 데이터베이스에서 삭제
+            emailVerificationRepository.delete(verification);
+
+            return true;
+        }
+        // 인증코드가 틀렸거나 만료된 경우 자동으로 인증코드를 재발송
+        updateVerificationCode(email,verification);
+        return false;
+    }
+
+    // 인증코드 재발급 처리
+    private void updateVerificationCode(String email, EmailVerification verification) {
+
+        // 1. 새 인증코드를 생성하고 메일을 재발송
+        sendVerificationEmail(email);
+
+        // 2. 데이터베이스에 인증코드와 만료시간을 갱신
+        verification.updateNewCode(newCode);
+        emailVerificationRepository.save(verification);
+
+    }
+
+
 }
 
 

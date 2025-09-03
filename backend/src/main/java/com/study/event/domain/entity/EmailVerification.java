@@ -38,4 +38,10 @@ public class EmailVerification {
         FOREIGN KEY (event_user_id)
         REFERENCES tbl_event_user (ev_user_id)
      */
+
+
+    public void updateNewCode(String newCode){
+        this.verificationCode = newCode;
+        this.expiryDate = LocalDateTime.now().plusMinutes(5);
+    }
 }
