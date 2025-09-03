@@ -33,7 +33,7 @@ public class EventUser {
     @Builder.Default
     private Role role = Role.COMMON; // 권한
 
-//    @CreationTimestamp
+//    @CreationTimestamp 검증완료후 수동으로 넣어줄거임
     private LocalDateTime createdAt;
 
     // 이메일 인증을 완료했는지 여부
