@@ -7,13 +7,13 @@ import ProgressBar from "../common/ProgressBar.jsx";
 const SignUpForm = () => {
 
     // 현재 어떤 스텝인지 확인
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const [isNext, setIsNext] = useState(false);
 
     // 이메일 중복확인이 끝날때 호출 될 함수
     const emailSuccessHandler = () => {
 
-        setIsNext(true);
+        setIsNext(true); // progress bar 띄우기
 
         setTimeout(() => {
             setStep(2);
