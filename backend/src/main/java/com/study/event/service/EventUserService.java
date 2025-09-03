@@ -147,7 +147,7 @@ public class EventUserService {
     private void updateVerificationCode(String email, EmailVerification verification) {
 
         // 1. 새 인증코드를 생성하고 메일을 재발송
-        sendVerificationEmail(email);
+        String newCode = sendVerificationEmail(email);
 
         // 2. 데이터베이스에 인증코드와 만료시간을 갱신
         verification.updateNewCode(newCode);
