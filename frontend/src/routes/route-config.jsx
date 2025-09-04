@@ -49,13 +49,13 @@ const router = createBrowserRouter([
                     {
                         index: true,
                         element: <EventPage/>,
-                        // loader함수는 언제 실행되냐? 페이지가 라우팅될 때 트리거됨
+                        // loader 함수는 언제 실행되냐? 페이지가 라우팅될 때 트리거됨
                         // loader: eventListLoader
                     },
                     {
                         path: 'new',
                         element: <NewEventPage />,
-                        // action함수는 CUD를 트리거
+                        // action 함수는 CUD를 트리거
                         action: manipulateAction
                     },
                     {
