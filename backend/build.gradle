@@ -41,7 +41,8 @@ dependencies {
     annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
 // 이메일 전송 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-mail'
-
+// 스프링 시큐리티 모듈
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 tasks.named('test') {
