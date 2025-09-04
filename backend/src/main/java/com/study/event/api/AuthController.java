@@ -45,6 +45,8 @@ public class AuthController {
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody SignupRequest dto) {
 
+        log.info("save request dto - {}", dto);
+
         eventUserService.confirmSignup(dto);
 
         return ResponseEntity.ok().body(Map.of(
