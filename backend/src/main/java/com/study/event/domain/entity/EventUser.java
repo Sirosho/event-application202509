@@ -45,4 +45,8 @@ public class EventUser {
         this.emailVerified = true;
     }
 
+    public void confirm(String password) {
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
+    }
 }
