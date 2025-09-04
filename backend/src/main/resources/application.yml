@@ -7,7 +7,7 @@ spring:
     host: smtp.naver.com
     port: 465
     username: pack8448@naver.com # github 유출 금지
-    password: BKU8YLMM4S77 # github 유출 금지
+    password: # github 유출 금지
     protocol: smtp
     properties:
       mail:
