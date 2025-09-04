@@ -18,6 +18,7 @@ export const eventDetailLoader = async ({ params }) => {
 // 토큰데이터를 파싱하는 함수
 const parseUserData = () => JSON.parse(localStorage.getItem('userData'));
 
+
 // 로컬스토리지에 있는 토큰데이터를 불러오는 로더
 export const userDataLoader = () => parseUserData();
 
@@ -31,6 +32,10 @@ export const authCheckLoader = () => {
     }
     return null; // 현재 페이지에 머물게 됨
 };
+
+
+// 로컬 스토리지에서 토큰값을 뽑아주는 함수
+export const getUserToken= () => parseUserData()?.token;
 
 
 
