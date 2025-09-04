@@ -1,4 +1,4 @@
-package com.study.event.domain.dto;
+package com.study.event.domain.dto.request;
 
 import lombok.Builder;
 
